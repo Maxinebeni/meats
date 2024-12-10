@@ -16,7 +16,6 @@
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicons/favicon.ico">
@@ -43,14 +42,14 @@
         <div class="container position-relative">
           <!-- Logo -->
           <a class="navbar-brand d-inline-flex position-absolute top-0 end-0 m-2" href="index.html">
-            <img class="d-inline-block" src="public/assets/img/gallery/log.png" alt="logo" style="max-height: 35px;" />
+            <img class="d-inline-block" src="img/gallery/log.png" alt="logo" style="max-height: 35px;" />
           </a>          
       
           <!-- Content -->
           <div class="row flex-center">
             <div class="col-md-5 col-lg-6 order-0 order-md-1 mt-4 mt-md-0">
               <a class="img-landing-banner" href="#!">
-                <img class="img-fluid" src="public/assets/img/gallery/hero.png" alt="hero-header" />
+                <img class="img-fluid" src="img/gallery/hero.png" alt="hero-header" />
               </a>
             </div>
             <div class="col-md-7 col-lg-6 py-4 text-md-start text-center">
@@ -72,34 +71,36 @@
                   <div class="tab-content mt-2" id="nav-tabContent">
                     <!-- First Tab -->
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                      <form class="row gx-2 gy-2 align-items-center">
+                      <form class="row gx-2 gy-2 align-items-center" onsubmit="return validateEmail('inputDelivery')">
                         <div class="col">
                           <div class="input-group-icon">
                             <i class="fas fa-map-marker-alt text-danger input-box-icon"></i>
-                            <label class="visually-hidden" for="inputDelivery">Address</label>
+                            <label class="visually-hidden" for="inputDelivery">Email</label>
                             <input class="form-control input-box form-foodwagon-control" id="inputDelivery" type="text" placeholder="Enter Your Email" />
+                            <small id="error-inputDelivery" class="text-danger d-none">Please enter a valid email address</small>
                           </div>
                         </div>
                         <div class="d-grid gap-2 col-sm-auto">
-                          <button class="btn btn-danger" type="button" onclick="window.location.href='https://www.meatworlds.com/shop-details.html';">Proceed to order</button>
+                          <button class="btn btn-danger" type="submit">Proceed to order</button>
                         </div>
                       </form>
                     </div>
                     <!-- Second Tab -->
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                      <form class="row gx-2 gy-2 align-items-center">
+                      <form class="row gx-2 gy-2 align-items-center" onsubmit="return validateEmail('inputPickup')">
                         <div class="col">
                           <div class="input-group-icon">
                             <i class="fas fa-map-marker-alt text-danger input-box-icon"></i>
                             <label class="visually-hidden" for="inputPickup">Email</label>
                             <input class="form-control input-box form-foodwagon-control" id="inputPickup" type="text" placeholder="Enter Your Email" />
+                            <small id="error-inputPickup" class="text-danger d-none">Please enter a valid email address</small>
                           </div>
                         </div>
                         <div class="d-grid gap-2 col-sm-auto">
-                          <button class="btn btn-danger" type="button" onclick="window.location.href='https://www.meatworlds.com/shop-details.html';">Proceed to order</button>
+                          <button class="btn btn-danger" type="submit">Proceed to order</button>
                         </div>
                       </form>
-                    </div>
+                    </div>  
                   </div>
                 </div>
               </div>
@@ -120,7 +121,7 @@
                 <div class="card card-span mb-3 shadow-lg">
                   <div class="card-body py-0">
                     <div class="row justify-content-center">
-                      <div class="col-md-5 col-xl-7 col-xxl-8 g-0 order-0 order-md-1"><img class="img-fluid w-100 fit-cover h-100 rounded-top rounded-md-end rounded-md-top-0" src="public/assets/img/gallery/new.png" alt="..." /></div>
+                      <div class="col-md-5 col-xl-7 col-xxl-8 g-0 order-0 order-md-1"><img class="img-fluid w-100 fit-cover h-100 rounded-top rounded-md-end rounded-md-top-0" src="img/gallery/new.png" alt="..." /></div>
                       <div class="col-md-7 col-xl-5 col-xxl-4 p-4 p-lg-5">
                         <h1 class="card-title mt-xl-5 mb-4">Unbeatable<span class="text-primary"> Meat Deals</span></h1>
                         <p class="fs-1">Get 15% OFF and free Delivery on your first Order!</p>
@@ -136,15 +137,10 @@
         </section>
         <!-- <section> close ============================-->
         <!-- ============================================-->
-  
-
-      
-
       <section class="py-0">
-        <div class="bg-holder" style="background-image:url(public/assets/img/gallery/cta.png);background-position:center;background-size:cover;">
+        <div class="bg-holder" style="background-image:url(img/gallery/cta.png);background-position:center;background-size:cover;">
         </div>
         <!--/.bg-holder-->
-
         <div class="container">
           <div class="row flex-center">
             <div class="col-xxl-9 py-7 text-center">
@@ -194,6 +190,28 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="fontawesome/all.min.js"></script>
     <script src="js/theme.js"></script>
+
+    <script>
+      function validateEmail(inputId) {
+        const emailInput = document.getElementById(inputId);
+        const errorElement = document.getElementById(`error-${inputId}`);
+        const emailValue = emailInput.value.trim();
+    
+        // Email validation regex
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+        if (!emailRegex.test(emailValue)) {
+          // Show error message if invalid
+          errorElement.classList.remove('d-none');
+          return false; // Prevent form submission
+        }
+    
+        // Hide error if valid and redirect
+        errorElement.classList.add('d-none');
+        window.location.href = 'https://www.meatworlds.com/shop-details.html';
+        return false; // Prevent form default submission since we manually redirect
+      }
+    </script>
 
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&amp;display=swap" rel="stylesheet">
   </body>
